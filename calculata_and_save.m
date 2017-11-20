@@ -1,0 +1,26 @@
+% calculate fits and store them
+
+files = {...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw1_1uMactin_LatA_nobump_thr150_Salapaka50',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw5_1uM_LatA_cut_thr150_Salapaka50',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw1_1uMactin_nobump_thr300_Salapaka50',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw2_BSA_nobump_thr300_Salapaka50'};
+file_names = {...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw1_1uMactin_LatA_nobump_thr150_Salapaka30',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw5_1uM_LatA_cut_thr150_Salapaka30',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw1_1uMactin_nobump_thr300_Salapaka30',...
+    'C:\Users\Rafael\Documents\ITQB estágio\code and pdf\zmw2_BSA_nobump_thr300_Salapaka30'};
+
+for file = 1:length(files)
+    load(files{file});
+    
+    sz = size(Raw);
+    Step = zeros(sz(1),sz(2));
+    
+    for i = 1:sz(1)
+        fprintf('\n\n\n%d of %d\n\n\n',i,sz(1));
+        Step(i,:) = stepfit1_alvaro(Raw(i,:));        
+    end
+    
+    save(file_names{file},'Raw','Step');
+end
